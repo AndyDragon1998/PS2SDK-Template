@@ -38,7 +38,7 @@ IMPORT_BIN2C(padman_irx);
 IMPORT_BIN2C(libsd_irx);
 IMPORT_BIN2C(audsrv_irx);
 
-char* relativePath;
+char relativePath[];
 
 StateMachine GameMachineState;
 
@@ -89,7 +89,7 @@ void reset_iop()
 int main(int argc, char* argv[])
 {
 
-	relativePath = dirname(argv[0]);
+	strcpy(relativePath ,dirname(argv[0]));
 	reset_iop();
 	
 	SifExecModuleBuffer(padman_irx, size_padman_irx, 0, NULL, NULL);

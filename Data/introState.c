@@ -40,7 +40,10 @@ void IntroStart(GSGLOBAL* gsGlobal)
 	IntroImageColour = GS_SETREG_RGBAQ(0xFF,0xFF,0xFF,AlphaChannel,0x00);
 	gsKit_set_primalpha(gsGlobal, GS_SETREG_ALPHA(0,1,0,1,0), 0);
 	int i = strlen(relativePath);
-	gsKit_texture_png(gsGlobal, &IntroImage, strcat(relativePath, INTROIMAGEPATH));
+	char temp[4096];
+	strcpy(temp, relativePath);
+	strcat(temp, INTROIMAGEPATH);
+	gsKit_texture_png(gsGlobal, &IntroImage, temp);
 	
 	introTimer = 0;
 }

@@ -14,4 +14,4 @@ extern StateMachine GameMachineState;
 
 extern Controller PlaystationGamePad;
 
-extern char* relativePath;
+extern char relativePath[];

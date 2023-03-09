@@ -42,12 +42,18 @@ void MenuStart(GSGLOBAL* gsGlobal)
 {
 	idleTimer = 0; // Once the Idle timer reaches 6000 then restart the screen to prevent screen burn on CRT
 	initMusicFormat();
-	char* tempy = *relativePath;
-	MenuMusicy.fileName = strcat(tempy, TITLEMUSICPATH);
+	char temp[4096];
+	strcpy(temp, relativePath);
+	strcat(temp, TITLEMUSICPATH);
+	MenuMusicy.fileName = temp;
 	
 	LoadMusic(&MenuMusicy);
-	gsKit_texture_png(gsGlobal, &TitleImage, strcat(relativePath, TITLEIMAGEPATH));
 
+	char tempy[4096];
+	strcpy(tempy, relativePath);
+	strcat(tempy, TITLEIMAGEPATH);
+	gsKit_texture_png(gsGlobal, &TitleImage,tempy);
+	
 	selectedOption = 0;
 }
 

@@ -21,8 +21,7 @@ void initMusicFormat()
 {
 	musicFormat.bits = 16;
 	musicFormat.freq = 44100;
-	musicFormat.channels = 1;
-	
+	musicFormat.channels = 2;
 }
 
 void LoadMusic(BGM *bgm)
@@ -40,7 +39,7 @@ void LoadMusic(BGM *bgm)
 	}
 
 	
-	bgm->err = audsrv_set_format(&musicFormat);
+	
 	audsrv_set_volume(MAX_VOLUME);
 
 	bgm->wav = fopen(bgm->fileName, "rb");
@@ -65,6 +64,8 @@ void LoadMusic(BGM *bgm)
     rewind(bgm->wav);
 	
 	fseek(bgm->wav, 0x30, SEEK_SET);
+	
+	bgm->err = audsrv_set_format(&musicFormat);
 }
 	
 

@@ -95,11 +95,11 @@ void reset_iop()
 
 static void prepare_drivers() 
 {
-    init_fileXio_driver();
-    init_memcard_driver(true);
+    //init_fileXio_driver();
+    //init_memcard_driver(true);
     init_usb_driver(true);
     //init_cdfs_driver();
-    init_joystick_driver(true);
+   	//init_joystick_driver(true);
     init_audio_driver();
     //init_poweroff_driver();
     //init_hdd_driver(true, true);
@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
 	
 	SifExecModuleBuffer(padman_irx, size_padman_irx, 0, NULL, NULL);
 	SifExecModuleBuffer(libsd_irx, size_libsd_irx, 0, NULL, NULL);
-	SifExecModuleBuffer(audsrv_irx, size_audsrv_irx, 0, NULL, NULL);
+	//SifExecModuleBuffer(audsrv_irx, size_audsrv_irx, 0, NULL, NULL);
 	prepare_drivers();
 	
 	// Initialize GamePad

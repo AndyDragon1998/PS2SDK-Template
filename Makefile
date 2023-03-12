@@ -2,10 +2,9 @@ EE_BIN = ProjectName.elf
 EE_BIN_COMPRESSED = compressed_$(EE_BIN)
 
 EE_OBJS = main.o \
-	Data/pad.o Data/stateManager.o Data/introState.o Data/menuState.o Data/gameState.o Data/overState.o Data/soundEffects.o Data/musicManager.o Data/textToGraphics.o audsrv.o libsd.o padman.o
+	Data/pad.o Data/stateManager.o Data/introState.o Data/menuState.o Data/gameState.o Data/overState.o Data/soundEffects.o Data/musicManager.o Data/textToGraphics.o libsd.o padman.o
 	
-EE_LIBS = -L$(PS2SDK)/ports/lib -L$(PS2DEV)/gsKit/lib/  -lpatches -ldebug -lmath3d -ljpeg -lfreetype -lgskit_toolkit -lgskit -ldmakit -lpng -lz -lmc -lelf-loader -lc
-
+EE_LIBS = -L$(PS2SDK)/ports/lib -L$(PS2DEV)/gsKit/lib/  -Lmodules/ds34bt/ee/ -Lmodules/ds34usb/ee/ -lpatches -lfileXio -lpad -ldebug -lmath3d -ljpeg -lfreetype -lgskit_toolkit -lgskit -ldmakit -lpng -lz -lmc -laudsrv -lelf-loader -lc 
 EE_INCS += -I$(PS2DEV)/gsKit/include -I$(PS2SDK)/ports/include -I$(PS2SDK)/ports/include/freetype2 -I$(PS2SDK)/ports/include/zlib
 #EE_CFLAGS is passed to GCC when compiling
 #EE_LDFLAGS is passed to GCC/ld when linking
@@ -41,9 +40,6 @@ reset:
 #The GS Enviroment Variable and path had to be removed, so that the pad script would function.
 
 #embedded stuff
-audsrv.s: $(PS2SDK)/iop/irx/audsrv.irx
-	echo "Embedding AUDSRV Driver..."
-	$(BIN2S) $< $@ audsrv_irx
 
 padman.s: $(PS2SDK)/iop/irx/padman.irx
 	echo "Embedding PADMAN Driver..."

@@ -4,7 +4,7 @@ EE_BIN_COMPRESSED = compressed_$(EE_BIN)
 EE_OBJS = main.o \
 	Data/pad.o Data/stateManager.o Data/introState.o Data/menuState.o Data/gameState.o Data/overState.o Data/soundEffects.o Data/musicManager.o Data/textToGraphics.o audsrv.o libsd.o padman.o
 	
-EE_LIBS = -L$(PS2SDK)/ports/lib -L$(PS2DEV)/gsKit/lib/ -Lmodules/ds34bt/ee/ -Lmodules/ds34usb/ee/ -lpatches -lfileXio -lpad -ldebug -lmath3d -ljpeg -lfreetype -lgskit_toolkit -lgskit -ldmakit -lpng -lz -lmc -laudsrv -lelf-loader -laudsrv -lc 
+EE_LIBS = -L$(PS2SDK)/ports/lib -L$(PS2DEV)/gsKit/lib/  -lpatches -ldebug -lmath3d -ljpeg -lfreetype -lgskit_toolkit -lgskit -ldmakit -lpng -lz -lmc -lelf-loader -lc
 
 EE_INCS += -I$(PS2DEV)/gsKit/include -I$(PS2SDK)/ports/include -I$(PS2SDK)/ports/include/freetype2 -I$(PS2SDK)/ports/include/zlib
 #EE_CFLAGS is passed to GCC when compiling
@@ -12,6 +12,9 @@ EE_INCS += -I$(PS2DEV)/gsKit/include -I$(PS2SDK)/ports/include -I$(PS2SDK)/ports
 
 EE_CFLAGS = -I$(PS2DEV)/gsKit/include
 EE_LDFLAGS = -L$(PS2DEV)/gsKit/lib
+
+EE_LDFLAGS += -L$(PS2SDK)/ports/lib
+EE_LIBS += -lps2_drivers -I$(PS2SDK)/ports/include
 
 BIN2S = @bin2s
 

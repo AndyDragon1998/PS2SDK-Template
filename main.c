@@ -19,6 +19,14 @@
 #include <sbv_patches.h>
 #include <assert.h>
 
+#include <tamtypes.h>
+#include <kernel.h>
+#include <sifrpc.h>
+#include <loadfile.h>
+#include <string.h>
+#include <stdbool.h>
+#include <ps2_all_drivers.h>
+
 #include <unistd.h>
 
 
@@ -85,19 +93,34 @@ void reset_iop()
     sbv_patch_enable_lmb();
 }
 
+static void prepare_drivers() 
+{
+    init_fileXio_driver();
+    init_memcard_driver(true);
+    init_usb_driver(true);
+    //init_cdfs_driver();
+    init_joystick_driver(true);
+    init_audio_driver();
+    //init_poweroff_driver();
+    //init_hdd_driver(true, true);
+}
+
 
 int main(int argc, char* argv[])
 {
 
-	strcpy(relativePath ,dirname(argv[0]));
+	
 	reset_iop();
 	
 	SifExecModuleBuffer(padman_irx, size_padman_irx, 0, NULL, NULL);
 	SifExecModuleBuffer(libsd_irx, size_libsd_irx, 0, NULL, NULL);
 	SifExecModuleBuffer(audsrv_irx, size_audsrv_irx, 0, NULL, NULL);
+	prepare_drivers();
 	
 	// Initialize GamePad
 	PadInitialize();
+	
+	strcpy(relativePath ,dirname(argv[0]));
 	
 	u64 Black = GS_SETREG_RGBAQ(0x00,0x00,0x00,0x00,0x00);
 	

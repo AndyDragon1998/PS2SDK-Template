@@ -16,6 +16,7 @@
 #include "include/overState.h"
 #include "include/introState.h"
 #include "include/musicManager.h"
+#include "include/textToGraphics.h"
 #include "include/pad.h"
 
 
@@ -53,6 +54,8 @@ void MenuStart(GSGLOBAL* gsGlobal)
 	strcpy(tempy, relativePath);
 	strcat(tempy, TITLEIMAGEPATH);
 	gsKit_texture_png(gsGlobal, &TitleImage,tempy);
+	
+	SetUpFont(gsGlobal);
 	
 	selectedOption = 0;
 }
@@ -124,6 +127,8 @@ void MenuDraw(GSGLOBAL* gsGlobal, u64 colour)
 						TitleImage.Height * 2, // V2
 						2,
 						colour);
+
+	DrawText(120, 380, "YF:VBNT CNFHN",2, gsGlobal, &colour);
 
 	switch(selectedOption)
 	{

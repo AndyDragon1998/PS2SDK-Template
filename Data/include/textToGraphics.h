@@ -20,9 +20,9 @@ typedef struct
 
 Font setUpFontStruct(int x, int y, int width, int height);
 
-void SetUpFont(int fontLanguage, GSGLOBAL* gsGlobal);
+void SetUpFont(GSGLOBAL* gsGlobal);
 
-void DrawText(int xpos, int ypos, char* Text);
+void DrawText(int xpos, int ypos, char* Text, int scale, GSGLOBAL* gsGlobal, u64 colour);
 
 void DrawAnimatedText(int xpos, int ypos, char* Text, int type);
 

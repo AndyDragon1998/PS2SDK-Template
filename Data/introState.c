@@ -34,10 +34,14 @@ GSTEXTURE IntroImage;
 
 int introTimer;
 
+u64 oldalpha;
+
+
 void IntroStart(GSGLOBAL* gsGlobal)
 {
 	AlphaChannel = 0;
 	IntroImageColour = GS_SETREG_RGBAQ(0xFF,0xFF,0xFF,AlphaChannel,0x00);
+	oldalpha = gsGlobal->PrimAlpha;
 	gsKit_set_primalpha(gsGlobal, GS_SETREG_ALPHA(0,1,0,1,0), 0);
 	int i = strlen(relativePath);
 	char temp[4096];
@@ -93,6 +97,8 @@ void IntroDraw(GSGLOBAL* gsGlobal, u64 colour)
 
 void IntroEnd(GSGLOBAL* gsGlobal)
 {
+	gsKit_set_primalpha(gsGlobal,oldalpha, 0);
+
 	printf("This should Run when MenuState is Gone.\n");
 	// Clear VRAM after the Menu is done~
 	gsKit_vram_clear(gsGlobal);
